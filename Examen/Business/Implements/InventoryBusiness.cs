@@ -53,14 +53,12 @@ namespace Business.Implements
         {
             if (dto == null || dto.Id <= 0)
                 throw new ValidationException("El ID del inventario es inválido");
-
             var exists = await _inventoryData.GetByIdAsync(dto.Id)
                 ?? throw new EntityNotFoundException
                 {
                     EntityType = typeof(Inventory),
                     Id = dto.Id
                 };
-
             return await _inventoryData.ActiveAsync(dto.Id, dto.Status);
         }
 

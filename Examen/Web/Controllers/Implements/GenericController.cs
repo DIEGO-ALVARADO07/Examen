@@ -103,23 +103,18 @@ namespace Web.Controllers.Implements
             }
         }
 
-        [HttpDelete("{id}")]
-        public virtual async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-                var result = await _business.DeleteAsync(id);
-                if (!result)
-                    return NotFound($"Registro con ID {id} no encontrado");
 
-                return Ok(new { Success = true });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error al eliminar registro con ID {id}: {ex.Message}");
-                return StatusCode(500, "Error interno del servidor");
-            }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _business.DeleteAsync(id);
+            if (!result)
+                return NotFound($"Registro con ID {id} no encontrado");
+
+            return Ok(new { Success = true, Message = "Eliminado permanentemente" });
         }
+
 
         // Método abstracto para obtener el ID de la entidad creada para el CreatedAtAction
         protected abstract int GetEntityId(TDto dto);

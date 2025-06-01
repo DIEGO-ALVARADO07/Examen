@@ -45,8 +45,8 @@ namespace Web.Controllers.Implements
             }
         }
 
-        [HttpDelete("logic/{id}")]
-        public async Task<IActionResult> Active(int id)
+        [HttpDelete("active/{id}")]
+        public async Task<IActionResult> Active(int id)  // ✅ Coincide perfectamente con la interfaz
         {
             try
             {
@@ -55,12 +55,9 @@ namespace Web.Controllers.Implements
                     Id = id,
                     Status = false
                 };
-
                 var result = await _inventoryBusiness.DeleteLogicInventoryAsync(deleteDto);
-
                 if (!result)
                     return NotFound($"Inventario con ID {id} no encontrado");
-
                 return Ok(new { Success = true });
             }
             catch (ArgumentException ex)
@@ -74,6 +71,5 @@ namespace Web.Controllers.Implements
                 return StatusCode(500, "Error interno del servidor");
             }
         }
-
     }
 }

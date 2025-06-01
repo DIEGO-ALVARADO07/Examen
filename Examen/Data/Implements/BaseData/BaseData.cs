@@ -15,7 +15,7 @@ namespace Data.Implements.BaseData
         // Implementación completa de los métodos abstractos
         public override async Task<List<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _context.Set<T>().Where(x => x.Status == true).ToListAsync();
         }
 
         public override async Task<T> GetByIdAsync(int id)
@@ -47,5 +47,6 @@ namespace Data.Implements.BaseData
             await _context.SaveChangesAsync();
             return true;
         }
+
     }
 }

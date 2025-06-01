@@ -14,5 +14,6 @@ namespace Entity.Dtos.ProductDTO
     public class ProductDto : GenericDTO
     {
         public int Price { get; set; }
+        public int IdInventario { get; set; }
     }
 }
